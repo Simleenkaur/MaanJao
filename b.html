@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message For You</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a handwritten feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the page */
+        body {
+            font-family: 'Caveat', cursive;
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        /* Keyframe animation for the floating hearts */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Styling for the animated background hearts */
+        .heart-shape {
+            position: absolute;
+            bottom: -150px;
+            background-color: rgba(255, 105, 180, 0.3);
+            width: 40px;
+            height: 40px;
+            animation: float 25s infinite linear;
+            transform: rotate(-45deg);
+        }
+        .heart-shape:before, .heart-shape:after {
+            content: "";
+            position: absolute;
+            background-color: inherit;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .heart-shape:before { top: -20px; left: 0; }
+        .heart-shape:after { top: 0; left: 20px; }
+
+        /* Envelope Animation Styles */
+        .envelope-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            animation: fly-in 2s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.2) rotate(-30deg) translateY(100vh);
+        }
+
+        @keyframes fly-in {
+            0% {
+                transform: scale(0.2) rotate(-30deg) translateY(100vh);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #f0e6e6;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-color: #e9d8d8;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            transform-origin: top;
+            transition: transform 0.5s ease-in-out;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .letter {
+            position: absolute;
+            top: 5px;
+            left: 5%;
+            width: 90%;
+            height: 95%;
+            background: white;
+            border-radius: 5px;
+            transition: transform 0.5s 0.3s ease-in-out;
+            transform: translateY(0);
+            padding: 20px;
+            overflow: hidden;
+            text-align: center;
+            color: #333;
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-120px);
+        }
+        
+        /* Hide animation and show message */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-pink-50">
+
+    <!-- Container for the animated background shapes -->
+    <div class="background-shapes" aria-hidden="true"></div>
+
+    <!-- Envelope Animation -->
+    <div id="envelope-animation" class="envelope-wrapper">
+        <div id="envelope" class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="letter">
+                <svg class="w-12 h-12 text-red-400 mx-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                <p class="text-xl mt-2">Click to open</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content container (initially hidden) -->
+    <main id="main-content" class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative z-10 opacity-0 transition-opacity duration-1000">
+        <!-- Message Card -->
+        <div class="bg-white/80 backdrop-blur-sm p-6 sm:p-10 rounded-2xl shadow-2xl text-center max-w-2xl w-full">
+            
+            <h2 class="text-4xl sm:text-5xl text-gray-800 font-semibold mb-6">To Bablu,</h2>
+
+            <!-- The message text -->
+            <p class="text-2xl sm:text-3xl text-gray-700 leading-relaxed">
+                I know sometimes I can be annoying and say things which upset you. Maybe I didn't say the right thing, but my intentions are good and I accept I did wrong. It's something you also know that I didn't mean to hurt you or anything. Please maan jaao :(
+            </p>
+            <p class="text-3xl sm:text-4xl text-gray-800 font-semibold mt-6">
+                I really love you, and I wish the best for you.
+            </p>
+
+            <!-- New Message -->
+            <p class="mt-8 text-gray-600 text-2xl sm:text-3xl">
+                I know this is a crucial time for you, exams are approaching. I don't want to pareshan you more.
+            </p>
+ <p class="mt-8 text-gray-600 text-2xl sm:text-3xl">
+                Baat karlena jab apka mann kare , i miss you  
+            </p>
+            <!-- Heart Icon with a pulsing animation -->
+            <div class="mt-8 flex justify-center">
+                <svg class="w-16 h-16 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            
+            <!-- Closing -->
+            <p class="text-3xl sm:text-4xl text-pink-500 font-bold mt-8">
+                Yours truly, Babulali
+            </p>
+
+        </div>
+    </main>
+
+    <script>
+        // JavaScript for animations and interactions
+        const envelope = document.getElementById('envelope');
+        const envelopeAnimation = document.getElementById('envelope-animation');
+        const mainContent = document.getElementById('main-content');
+
+        // Event listener to open the envelope on click
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('open');
+            // After animation, hide envelope and show the main message
+            setTimeout(() => {
+                envelopeAnimation.style.transition = 'opacity 1s';
+                envelopeAnimation.style.opacity = '0';
+                mainContent.style.opacity = '1';
+                setTimeout(() => {
+                    envelopeAnimation.classList.add('hidden');
+                }, 1000); // Wait for fade out to complete
+            }, 1000); // Corresponds to letter slide animation
+        });
+
+        // JavaScript to generate the floating hearts in the background
+        const container = document.querySelector('.background-shapes');
+        const numberOfHearts = 20; // Increased hearts for more effect
+
+        for (let i = 0; i < numberOfHearts; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-shape');
+            
+            const size = Math.random() * 50 + 20; // Size between 20px and 70px
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            heart.style.animationDuration = `${Math.random() * 15 + 15}s`; // Duration between 15s and 30s
+
+            // Dynamically create style rules for each heart's pseudo-elements
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .heart-shape:nth-of-type(${i + 1}):before {
+                    top: -${size / 2}px;
+                    width: ${size}px;
+                    height: ${size}px;
+                }
+                .heart-shape:nth-of-type(${i + 1}):after {
+                    left: ${size / 2}px;
+                    width: ${size}px;
+                    height: ${size}px;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            container.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
